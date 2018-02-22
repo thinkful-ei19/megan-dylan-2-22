@@ -1,7 +1,9 @@
+'use strict';
+
 $(function() {
 
-    function createItem(itemText) {
-        return `
+  function createItem(itemText) {
+    return `
         <li>
             <span class="shopping-item">${itemText}</span>
             <div class="shopping-item-controls">
@@ -14,22 +16,29 @@ $(function() {
             </div>
         </li>
         `;
-    }
+  }
 
 
 
-    /////////////
-    //ADD BUTTON
-    ////////////
+  /////////////
+  //ADD BUTTON
+  ////////////
 
-    $('#js-shopping-list-form').submit(function(event) {
-        event.preventDefault();
-        const userInput = $(event.target).find('.js-shopping-list-entry');
-        const userInputText = userInput.val();
-        userInput.val('');
-        console.log(userInputText);
-        const itemElement = createItem(userInputText);
-        $('.shopping-list').append(itemElement);
-    });
+  $('#js-shopping-list-form').submit(function(event) {
+    event.preventDefault();
+    const userInput = $(event.target).find('.js-shopping-list-entry');
+    const userInputText = userInput.val();
+    userInput.val('');
+    console.log(userInputText);
+    const itemElement = createItem(userInputText);
+    $('.shopping-list').append(itemElement);
+  });
+
+  $('.shopping-item-controls').on('click', function(event){
+    event.stopPropagation();
+    const checkButton = $(this).siblings('.shopping-item');
+    checkButton.toggleClass('shopping-item__checked');
+    console.log(checkButton);
+  });
 
 });
